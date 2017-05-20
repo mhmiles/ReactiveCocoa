@@ -5,8 +5,8 @@ import enum Result.NoError
 extension Reactive where Base: UISlider {
 
 	/// Sets slider's value.
-	public var value: BindingTarget<Float> {
-		return makeBindingTarget { $0.value = $1 }
+	public var value: ValueBindable<Base, Float> {
+		return makeValueBindable(value: \.value, values: { $0.reactive.values })
 	}
 
 	/// Sets slider's minimum value.

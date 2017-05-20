@@ -5,8 +5,11 @@ import enum Result.NoError
 extension Reactive where Base: UIStepper {
 
 	/// Sets the stepper's value.
-	public var value: BindingTarget<Double> {
-		return makeBindingTarget { $0.value = $1 }
+	public var value: ValueBindable<Base, Double> {
+        return ValueBindable(owner: base,
+                             isEnabled: \.isEnabled,
+                             value: \.value,
+                             values: { $0.reactive.values })
 	}
 
 	/// Sets stepper's minimum value.

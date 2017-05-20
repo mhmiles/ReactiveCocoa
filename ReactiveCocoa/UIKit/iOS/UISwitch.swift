@@ -3,24 +3,9 @@ import enum Result.NoError
 import UIKit
 
 extension Reactive where Base: UISwitch {
-	/// The action to be triggered when the switch is changed. It also controls
-	/// the enabled state of the switch
-	public var toggled: CocoaAction<Base>? {
-		get {
-			return associatedAction.withValue { info in
-				return info.flatMap { info in
-					return info.controlEvents == .valueChanged ? info.action : nil
-				}
-			}
-		}
-
-		nonmutating set {
-			setAction(newValue, for: .valueChanged)
-		}
-	}
 	/// Sets the on-off state of the switch.
-	public var isOn: BindingTarget<Bool> {
-		return makeBindingTarget { $0.isOn = $1 }
+	public var isOn: ValueBindable<Base, Bool> {
+		return makeValueBindable(value: \.isOn, values: { $0.reactive.isOnValues })
 	}
 
 	/// A signal of on-off states in `Bool` emitted by the switch.

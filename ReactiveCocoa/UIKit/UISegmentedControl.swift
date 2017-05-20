@@ -4,8 +4,8 @@ import UIKit
 
 extension Reactive where Base: UISegmentedControl {
 	/// Changes the selected segment of the segmented control.
-	public var selectedSegmentIndex: BindingTarget<Int> {
-		return makeBindingTarget { $0.selectedSegmentIndex = $1 }
+	public var selectedSegmentIndex: ValueBindable<Base, Int> {
+		return makeValueBindable(value: \.selectedSegmentIndex, values: { $0.reactive.selectedSegmentIndexes })
 	}
 
 	/// A signal of indexes of selections emitted by the segmented control.
