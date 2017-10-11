@@ -1,1 +1,1 @@
-github "ReactiveCocoa/ReactiveSwift" ~> 2.0
+github "mhmiles/ReactiveSwift" "disable-code-coverage"
